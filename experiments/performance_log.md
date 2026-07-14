@@ -15,6 +15,8 @@
 | [V5 ResNet34 1024](20260714-v5-resnet34-1024/README.md) | v5 | 0.9646 | 0.9643 | 0.9668 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 local | [ckpt](/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v5_resnet34_1024/checkpoints/epoch=7-step=1640.ckpt), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/scibn6c0) | H tied locally; retained only as a recall-diverse ensemble candidate. |
 | [V6 V5 Post-processing](20260714-v6-v5-postprocess/README.md) | v6 | 0.9606 | 0.9663 | 0.9572 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 local | [metric](20260714-v6-v5-postprocess/metrics.json), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/8cy2bpn0) | Rejected locally; no leaderboard score. |
 | [V8 Scale TTA](20260714-v8-scale-tta/README.md) | v8 | **0.9668** | **0.9725** | **0.9628** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v8-scale-tta/metrics.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v8_scale_tta_1024_1152_20260714_154949.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/7eb4lky8) | Adopted local TTA candidate; macro/global H bootstrap CIs were positive. Competition closed, so no leaderboard score. |
+| [V9 Model Ensemble](20260714-v9-model-ensemble/README.md) | v9 | **0.9673** | 0.9691 | **0.9672** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v9-model-ensemble/metrics_w050.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v9_v2b_v5_equal_20260714_170846.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/85wojhfj) | Adopted model-ensemble candidate; recall and both H aggregations improved. Competition closed, so no leaderboard score. |
+| [V10 Domain SSL](20260714-v10-domain-ssl/README.md) | v10 | 0.9649 | 0.9648 | 0.9667 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v10-domain-ssl/metrics.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v10_ssl_moco_epoch8_20260714_181610.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/jfq6ucaf) | Rejected as statistical tie: macro/global H +0.0001/+0.0004, but bootstrap CIs crossed zero. Recall rose while precision fell. |
 
 `N/A`는 해당 실험을 leaderboard에 제출하지 않아 점수가 존재하지 않는다는 뜻이다. Final
 score 원시 값과 증빙은 [2026-07-14 Final Leaderboard Evidence](/data/ephemeral/home/receipt-text-detection/docs/leaderboard/20260714/README.md)에 보존한다.
@@ -428,6 +430,50 @@ supports the D0 hypothesis. Adopt `1024+1152` as a TTA candidate and skip the lo
 The post-competition test JSON/CSV passed all format checks, but it is not hidden-score evidence.
 Next run V9 with V2B/V5 model map fusion alone so scale TTA and architecture diversity remain
 separate effects.
+
+## V9 Existing-model Probability-map Ensemble Result
+
+Detailed record: [V9 Model Ensemble](20260714-v9-model-ensemble/README.md)
+
+V9 averaged the 1024 probability maps from V2B ResNet18 epoch 8 and V5 ResNet34 epoch 7 with fixed
+equal weights, then applied V2B's unchanged DB post-processing once.
+
+- Macro H/P/R: `0.967266 / 0.969083 / 0.967177`
+- Global H/P/R: `0.965090 / 0.965880 / 0.964301`
+- Macro delta versus V2B: `+0.002481 / -0.000896 / +0.005714`
+- Global delta versus V2B: `+0.002841 / -0.001636 / +0.007262`
+- Macro/global H paired bootstrap 95% CI:
+  `[+0.000890, +0.004150] / [+0.000886, +0.004929]`
+- Macro/global H P(delta > 0): `0.9998 / 0.9990`
+
+The equal ensemble passed the gate, so the pre-registered V2B-heavy fallback was not run. V5-won
+images improved by `+0.01098` H while V2B-won images lost `-0.00375`, confirming useful but
+sample-dependent diversity. V9 has slightly higher macro H than V8 while V8 has slightly higher
+global H, so retain both rather than declaring a universal winner. The validated test JSON/CSV is
+an offline artifact, not hidden-score evidence. Combine V8 and V9 only in the later V13 final
+fusion stage.
+
+## V10 Domain Self-supervised Pilot Result
+
+Detailed record: [V10 Domain SSL](20260714-v10-domain-ssl/README.md)
+
+V10 used `lightly==1.5.25` MoCo v2 to pretrain the timm ResNet18 encoder on 7,772 receipt images
+without opening annotation files. The final SSL encoder then replaced only V2B's ImageNet
+initialization; supervised data, DBNet recipe, seed, epochs and post-processing stayed fixed.
+
+- Independent macro H/P/R: `0.964897 / 0.964765 / 0.966682`
+- Independent global H/P/R: `0.962613 / 0.961242 / 0.963987`
+- Macro delta versus V2B: `+0.000112 / -0.005214 / +0.005219`
+- Global delta versus V2B: `+0.000363 / -0.006274 / +0.006948`
+- Macro/global H P(delta > 0): `0.5552 / 0.6396`
+- Macro/global H 95% CI: `[-0.001548, +0.001852] / [-0.001709, +0.002546]`
+
+Recall improved consistently but precision fell by a similar amount, leaving H statistically tied.
+There was also a one-epoch recall collapse at epoch 3 before recovery. Reject V10 under the
+pre-registered tie rule and use the V2B ImageNet initialization in V11. MoCo was technically valid,
+so do not open V10-ALT merely to search SSL algorithms on the same val. The validated test CSV is
+a recall-diverse reproducibility artifact, not a selected model or hidden-score claim. Next run
+V11A group-aware K-fold manifest generation.
 
 ## Final Leaderboard Result And Local Calibration
 

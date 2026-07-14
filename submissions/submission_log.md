@@ -3,7 +3,8 @@
 대회 종료 후에도 local 채택 기준을 통과한 candidate는 test prediction JSON과 CSV를 생성해
 이 표에 남긴다. 실제 제출한 파일은 `Submitted`, 마감 후 생성한 파일은
 `Generated offline, competition closed`로 구분한다. Local에서 폐기된 진단 실험은 생성하지
-않는다.
+않는다. V10처럼 H point estimate가 근소하게 높고 recall-diverse 후보 보존을 명시적으로
+요청한 경우에는 예외적으로 생성하되, local gate reject를 Decision에 그대로 표시한다.
 
 | Date | CSV File | Prediction JSON | Config | Local CV | Official Val | Public LB | Final LB | Max Regions/Image | Invalid Polygons | Cap Applied | Risk Memo | Decision |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -12,5 +13,7 @@
 | 2026-07-13 | `submissions/v2_resolution896_epoch8_20260713_002412.csv` | `baseline_code/outputs/v2_resolution896_epoch8/submissions/20260713_002412.json` | `baseline_code/outputs/v2_resolution896/.hydra/config.yaml` | N/A | H=0.9615 / R=0.9611 / P=0.9638 | H=0.9603 / R=0.9556 / P=0.9667 | H=0.9637 / R=0.9606 / P=0.9682 | 215 | 0 | No | Final H +0.0416 over V1 and +0.0022 over local. Resolution 896 produced the largest Final gain. | Submitted, Final complete |
 | 2026-07-14 | `submissions/v2b_resolution1024_epoch8_20260714_001730.csv` | `baseline_code/outputs/v2b_resolution1024_epoch8/submissions/20260714_001730.json` | `baseline_code/outputs/v2b_resolution1024/.hydra/config.yaml` | N/A | H=0.9648 / R=0.9614 / P=0.9700 | H=0.9621 / R=0.9520 / P=0.9754 | H=0.9647 / R=0.9580 / P=0.9739 | 226 | 0 | No | Final rank 1. H +0.0010 over V2, with precision +0.0057 and recall -0.0026. | Submitted, Final rank 1 |
 | 2026-07-14 | `submissions/v8_scale_tta_1024_1152_20260714_154949.csv` | `baseline_code/outputs/v8_scale_tta_1024_1152/submissions/20260714_154949.json` | `experiments/20260714-v8-scale-tta/run_config_val.json` | N/A | H=0.9668 / R=0.9628 / P=0.9725 | N/A | N/A | 226 | 0 | No | Macro/global H improved by +0.0021/+0.0029 with positive paired-bootstrap CIs. Test labels are unavailable; the CSV is a reproducibility artifact, not hidden-score evidence. | Generated offline, competition closed |
+| 2026-07-14 | `submissions/v9_v2b_v5_equal_20260714_170846.csv` | `baseline_code/outputs/v9_v2b_v5_equal/submissions/20260714_170846.json` | `experiments/20260714-v9-model-ensemble/run_config_val_w050.json` | N/A | H=0.9673 / R=0.9672 / P=0.9691 | N/A | N/A | 219 | 0 | No | Equal model-map fusion improved macro/global H by +0.0025/+0.0028, mainly through recall. Test labels are unavailable and region count fell 2.2%, so no hidden-score claim is made. | Generated offline, competition closed |
+| 2026-07-14 | `submissions/v10_ssl_moco_epoch8_20260714_181610.csv` | `baseline_code/outputs/v10_ssl_moco_epoch8_predict/submissions/20260714_181610.json` | `baseline_code/outputs/v10_ssl_moco_epoch8_eval/.hydra/config.yaml` | N/A | H=0.9649 / R=0.9667 / P=0.9648 | N/A | N/A | 215 | 0 | No | Macro/global H point estimates rose only +0.0001/+0.0004 and both bootstrap CIs crossed zero. Recall rose while precision fell; test labels are unavailable. | Generated offline for reproducibility; local gate rejected |
 
 Final score evidence: [2026-07-14 leaderboard](/data/ephemeral/home/receipt-text-detection/docs/leaderboard/20260714/README.md).

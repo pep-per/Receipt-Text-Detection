@@ -19,6 +19,8 @@ required_files=(
   "baseline_code/runners/predict.py"
   "baseline_code/outputs/v2b_resolution1024/checkpoints/epoch=8-step=1845.ckpt"
   "baseline_code/outputs/v5_resnet34_1024/checkpoints/epoch=7-step=1640.ckpt"
+  "baseline_code/outputs/v10_ssl_moco/encoder_state_dict.pt"
+  "baseline_code/outputs/v10_ssl_moco_finetune/checkpoints/epoch=8-step=1845.ckpt"
 )
 
 missing=0
