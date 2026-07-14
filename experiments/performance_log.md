@@ -17,9 +17,14 @@
 | [V8 Scale TTA](20260714-v8-scale-tta/README.md) | v8 | **0.9668** | **0.9725** | **0.9628** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v8-scale-tta/metrics.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v8_scale_tta_1024_1152_20260714_154949.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/7eb4lky8) | Adopted local TTA candidate; macro/global H bootstrap CIs were positive. Competition closed, so no leaderboard score. |
 | [V9 Model Ensemble](20260714-v9-model-ensemble/README.md) | v9 | **0.9673** | 0.9691 | **0.9672** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v9-model-ensemble/metrics_w050.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v9_v2b_v5_equal_20260714_170846.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/85wojhfj) | Adopted model-ensemble candidate; recall and both H aggregations improved. Competition closed, so no leaderboard score. |
 | [V10 Domain SSL](20260714-v10-domain-ssl/README.md) | v10 | 0.9649 | 0.9648 | 0.9667 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v10-domain-ssl/metrics.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v10_ssl_moco_epoch8_20260714_181610.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/jfq6ucaf) | Rejected as statistical tie: macro/global H +0.0001/+0.0004, but bootstrap CIs crossed zero. Recall rose while precision fell. |
+| [V11B Five-fold OOF](20260714-v11b-oof/README.md) | five V2B-recipe fold models | 0.9469 | 0.9507 | 0.9477 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 OOF | [metric](20260714-v11b-oof/oof_metrics.json), [folds](20260714-v11b-oof/fold_metrics.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/ca01s6al) | Fixed epoch-8 policy rejected: macro/global fold H std 0.0091/0.0070 and worst H 0.9329/0.9369. Match V2B update budget before V11C. |
 
 `N/A`는 해당 실험을 leaderboard에 제출하지 않아 점수가 존재하지 않는다는 뜻이다. Final
 score 원시 값과 증빙은 [2026-07-14 Final Leaderboard Evidence](/data/ephemeral/home/receipt-text-detection/docs/leaderboard/20260714/README.md)에 보존한다.
+
+V11B의 `Local` 열은 official val 404장 점수가 아니라 3,676장 leakage-free OOF macro
+CLEval이다. 모델마다 약 80%만 학습했으므로 V2B의 official-val 절댓값과 직접 우열 비교하지
+않고, fold 평균·분산·worst fold로 recipe 안정성을 판단한다.
 
 분석 단계인 D0는 새 model 또는 submission이 없어 점수 표의 version row로 추가하지 않았다.
 상세 결과와 artifact는 [D0 Train/Val/Test Data Audit](20260714-d0-data-audit/README.md)에 있다.
@@ -500,6 +505,28 @@ Detailed record: [V11A Group-aware K-fold Split](20260714-v11a-kfold-split/READM
 The first shuffled SGKF attempt failed structural balance before any model was trained. The final
 deterministic SGKF manifest passed every gate and reproduced byte-for-byte. Adopt it as the sole
 V11B OOF split; do not regenerate it after observing fold scores.
+
+## V11B Five-fold OOF Recipe Evaluation
+
+Detailed record: [V11B Five-fold OOF](20260714-v11b-oof/README.md)
+
+- Pooled OOF macro H/P/R: `0.946938 / 0.950739 / 0.947650`
+- Pooled OOF global H/P/R: `0.947775 / 0.950045 / 0.945515`
+- Fold macro H mean/std/min/max: `0.946937 / 0.009142 / 0.932941 / 0.956353`
+- Fold global H mean/std/min/max: `0.947767 / 0.007027 / 0.936876 / 0.954015`
+- Coverage: all `3,676` images exactly once, with no supervised human-label leakage
+- Stability gates: coverage passed; both standard-deviation and both worst-fold gates failed
+
+Fold 3 was broadly lower across original train/val source, small-text bins and region-count bins,
+so the failure is not explained by one measured stratum or by a precision-recall threshold trade-off.
+The five fixed checkpoints and duplicate epoch-8 checkpoints had identical model states, ruling out
+checkpoint selection as the cause.
+
+The comparison also exposed a training-budget confound: V2B epoch 8 had `1,845` optimizer updates,
+whereas each smaller fold-train set reached only `1,656` updates at epoch 8. Reject the literal
+fixed-epoch policy and do not build V11C yet. The next controlled run is `V11B-R1`: resume all five
+models for one epoch, evaluate every fixed epoch-9 state at about `1,840` updates, and keep the split,
+seed, threshold and gates unchanged. This is not per-fold checkpoint selection.
 
 ## Final Leaderboard Result And Local Calibration
 

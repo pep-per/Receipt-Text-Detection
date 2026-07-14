@@ -76,11 +76,31 @@ def train(config):
     callbacks = [
         LearningRateMonitor(logging_interval='step'),
         ModelCheckpoint(dirpath=checkpoint_path,
-                        save_top_k=3,
-                        save_last=True,
+                        save_top_k=config.get('checkpoint_save_top_k', 3),
+                        save_last=config.get('checkpoint_save_last', True),
                         monitor='val/hmean',
                         mode='max'),
     ]
+
+    fixed_checkpoint_epoch = config.get('fixed_checkpoint_epoch')
+    if fixed_checkpoint_epoch is not None:
+        fixed_checkpoint_epoch = int(fixed_checkpoint_epoch)
+        max_epochs = int(config.trainer.max_epochs)
+        if not 0 <= fixed_checkpoint_epoch < max_epochs:
+            raise ValueError(
+                f"fixed_checkpoint_epoch={fixed_checkpoint_epoch} must be in "
+                f"[0, {max_epochs - 1}]"
+            )
+        callbacks.append(
+            ModelCheckpoint(
+                dirpath=checkpoint_path,
+                filename=f"fixed-epoch={fixed_checkpoint_epoch}",
+                save_top_k=-1,
+                every_n_epochs=fixed_checkpoint_epoch + 1,
+                save_on_train_epoch_end=True,
+                enable_version_counter=False,
+            )
+        )
 
     trainer = pl.Trainer(
         **config.trainer,
@@ -93,10 +113,11 @@ def train(config):
         data_module,
         ckpt_path=config.get("resume", None),
     )
-    trainer.test(
-        model_module,
-        data_module,
-    )
+    if config.get('test_after_fit', True):
+        trainer.test(
+            model_module,
+            data_module,
+        )
 
 
 if __name__ == "__main__":

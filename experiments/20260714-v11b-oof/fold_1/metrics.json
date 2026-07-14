@@ -1,0 +1,15 @@
+{
+  "fold": 1,
+  "images": 735,
+  "regions_total": 79508,
+  "regions_mean": 108.17414965986394,
+  "macro_hmean": 0.9563534326293841,
+  "macro_precision": 0.9561085135758328,
+  "macro_recall": 0.9586699250604019,
+  "global_hmean": 0.9540150761604309,
+  "global_precision": 0.9525371789932251,
+  "global_recall": 0.9554976224899292,
+  "runtime_seconds": 132.64646817743778,
+  "peak_gpu_memory_gb": 1.3508009910583496,
+  "checkpoint": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v11b_fold1/checkpoints/fixed-epoch=8.ckpt"
+}

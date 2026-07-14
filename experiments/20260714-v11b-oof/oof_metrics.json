@@ -1,0 +1,70 @@
+{
+  "primary_checkpoint_policy": "fixed epoch 8 for every fold",
+  "overall_oof": {
+    "images": 3676,
+    "macro_hmean": 0.9469375434008318,
+    "macro_precision": 0.9507386277392263,
+    "macro_recall": 0.947650459326978,
+    "global_hmean": 0.9477749055101252,
+    "global_precision": 0.9500452167631581,
+    "global_recall": 0.9455154190583981,
+    "regions_total": 405120,
+    "regions_mean": 110.20674646354733
+  },
+  "prediction_sanity": {
+    "images": 3676,
+    "polygons": 405120,
+    "min_polygon_points": 4,
+    "polygons_with_fewer_than_4_points": 0,
+    "out_of_bounds_polygons": 159,
+    "out_of_bounds_images": 79,
+    "images_over_500_polygons": 0,
+    "max_polygons_per_image": 241
+  },
+  "fold_stability": {
+    "macro_hmean": {
+      "fold_mean": 0.9469368609109841,
+      "fold_std": 0.009141522852715706,
+      "fold_min": 0.9329407602903389,
+      "fold_max": 0.9563534326293841
+    },
+    "macro_precision": {
+      "fold_mean": 0.9507383573788646,
+      "fold_std": 0.005089079207480834,
+      "fold_min": 0.9424883400501848,
+      "fold_max": 0.9561085135758328
+    },
+    "macro_recall": {
+      "fold_mean": 0.9476495728782274,
+      "fold_std": 0.010353832223003607,
+      "fold_min": 0.9335827500008199,
+      "fold_max": 0.9586699250604019
+    },
+    "global_hmean": {
+      "fold_mean": 0.9477668820767011,
+      "fold_std": 0.007026854983623552,
+      "fold_min": 0.9368758514771739,
+      "fold_max": 0.9540151004255517
+    },
+    "global_precision": {
+      "fold_mean": 0.9500434575498662,
+      "fold_std": 0.005001701340978342,
+      "fold_min": 0.9423093717968165,
+      "fold_max": 0.9552472245630748
+    },
+    "global_recall": {
+      "fold_mean": 0.9455285067320395,
+      "fold_std": 0.010276566967774063,
+      "fold_min": 0.9315046331664615,
+      "fold_max": 0.9554976364330353
+    }
+  },
+  "gates": {
+    "all_images_have_exactly_one_oof_prediction": true,
+    "macro_hmean_fold_std_at_most_0_005": false,
+    "global_hmean_fold_std_at_most_0_005": false,
+    "worst_macro_hmean_at_least_0_955": false,
+    "worst_global_hmean_at_least_0_955": false
+  },
+  "passed": false
+}

@@ -8,6 +8,7 @@
 
 최근 실험:
 
+- [V11B Five-fold OOF Recipe Evaluation](20260714-v11b-oof/README.md): fixed epoch-8 policy rejected; fold variance and worst-fold gates failed, matched-update correction next
 - [V11A Group-aware K-fold Split](20260714-v11a-kfold-split/README.md): adopted; 3,676 images, balanced 5 folds, zero accepted-group leakage
 - [V10 Domain SSL](20260714-v10-domain-ssl/README.md): rejected as statistical tie; recall improved but macro/global H bootstrap CIs crossed zero
 - [V9 Model Ensemble](20260714-v9-model-ensemble/README.md): adopted locally; equal V2B/V5 map fusion raised recall and macro/global H
