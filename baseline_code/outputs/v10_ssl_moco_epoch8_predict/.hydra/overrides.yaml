@@ -1,0 +1,17 @@
+- preset=example
+- dataset_base_path=/data/ephemeral/home/receipt-text-detection/data/datasets/
+- exp_name=v10_ssl_moco_epoch8_predict
+- checkpoint_path=/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v10_ssl_moco_finetune/checkpoints/epoch\=8-step\=1845.ckpt
+- models.head.postprocess.box_thresh=0.25
+- transforms.train_transform.transforms.0.max_size=1024
+- transforms.train_transform.transforms.1.min_width=1024
+- transforms.train_transform.transforms.1.min_height=1024
+- transforms.val_transform.transforms.0.max_size=1024
+- transforms.val_transform.transforms.1.min_width=1024
+- transforms.val_transform.transforms.1.min_height=1024
+- transforms.test_transform.transforms.0.max_size=1024
+- transforms.test_transform.transforms.1.min_width=1024
+- transforms.test_transform.transforms.1.min_height=1024
+- transforms.predict_transform.transforms.0.max_size=1024
+- transforms.predict_transform.transforms.1.min_width=1024
+- transforms.predict_transform.transforms.1.min_height=1024

@@ -1,0 +1,46 @@
+{
+  "control": {
+    "images": 404,
+    "regions_total": 45067,
+    "regions_mean": 111.5519801980198,
+    "regions_min": 53,
+    "regions_max": 216,
+    "macro_hmean": 0.9647846673384751,
+    "macro_precision": 0.9699790920361434,
+    "macro_recall": 0.9614629999245747,
+    "global_hmean": 0.9622491749769205,
+    "global_precision": 0.9675159670171309,
+    "global_recall": 0.9570394133438312
+  },
+  "ssl": {
+    "images": 404,
+    "regions_total": 44648,
+    "regions_mean": 110.51485148514851,
+    "regions_min": 54,
+    "regions_max": 225,
+    "macro_hmean": 0.9648965532236761,
+    "macro_precision": 0.9647653331555942,
+    "macro_recall": 0.9666815683393195,
+    "global_hmean": 0.9626125693321228,
+    "global_precision": 0.961241602897644,
+    "global_recall": 0.9639872908592224
+  },
+  "delta": {
+    "macro_hmean": 0.00011188588520094633,
+    "macro_precision": -0.005213758880549202,
+    "macro_recall": 0.005218568414744773,
+    "global_hmean": 0.00036339435520227337,
+    "global_precision": -0.006274364119486897,
+    "global_recall": 0.006947877515391165,
+    "regions_mean": -1.0371287128712936
+  },
+  "prediction_validation": {
+    "invalid_point_count": 0,
+    "non_finite_coordinate": 0,
+    "zero_area": 0,
+    "images_over_500_regions": 0,
+    "empty_images": 0
+  },
+  "runtime_seconds": 72.448626562953,
+  "checkpoint": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v10_ssl_moco_finetune/checkpoints/epoch=8-step=1845.ckpt"
+}

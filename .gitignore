@@ -57,6 +57,7 @@ baseline_code/outputs/**/checkpoints/
 baseline_code/outputs/**/logs/
 baseline_code/outputs/**/submissions/
 baseline_code/outputs/**/events.out.tfevents*
+baseline_code/outputs/**/image_manifest.csv
 
 # Common local training artifacts outside the baseline output tree
 checkpoints/

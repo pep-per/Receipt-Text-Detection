@@ -1,0 +1,49 @@
+{
+  "experiment": "V10 Domain Self-supervised Pilot",
+  "algorithm": "MoCo v2",
+  "library": "lightly==1.5.25",
+  "label_access": "image pixels only; no annotation files opened",
+  "evaluation_scope": "transductive local",
+  "encoder": "timm resnet18 ImageNet initialization",
+  "epochs": 20,
+  "batch_size": 128,
+  "input_size": 224,
+  "learning_rate": 0.03,
+  "optimizer": "SGD",
+  "lr_schedule": "step-wise cosine decay",
+  "weight_decay": 0.0001,
+  "optimizer_momentum": 0.9,
+  "encoder_momentum_start": 0.996,
+  "encoder_momentum_end": 1.0,
+  "temperature": 0.1,
+  "memory_bank_size": 4096,
+  "projection_dim": 128,
+  "source_sampling": "equal expected sampling across 4 source families",
+  "source_counts": {
+    "official_train": 3272,
+    "official_val": 404,
+    "official_test": 413,
+    "cord_v2": 1000,
+    "sroie": 916,
+    "wildreceipt": 1767
+  },
+  "source_family_counts": {
+    "official": 4089,
+    "cord_v2": 1000,
+    "sroie": 916,
+    "wildreceipt": 1767
+  },
+  "images": 7772,
+  "steps_per_epoch": 60,
+  "seed": 42,
+  "augmentation": {
+    "min_crop_scale": 0.7,
+    "color_jitter_probability": 0.5,
+    "color_jitter_strength": 0.2,
+    "grayscale_probability": 0.1,
+    "gaussian_blur_probability": 0.2,
+    "horizontal_flip_probability": 0.0,
+    "vertical_flip_probability": 0.0,
+    "random_rotation_probability": 0.0
+  }
+}
