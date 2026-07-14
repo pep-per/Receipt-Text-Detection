@@ -1,0 +1,63 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python caches and local environments
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+
+# Notebook runtime state
+.ipynb_checkpoints/
+
+# Competition datasets stay local. Keep documentation, split manifests, and the
+# public submission-format example under version control.
+data/*
+!data/README.md
+!data/splits/
+!data/splits/**
+!data/datasets/
+data/datasets/*
+!data/datasets/sample_submission.csv
+
+# Downloaded source/data archives
+*.tar
+*.tar.gz
+*.tar.gz.*
+*.tar.zst
+*.zip
+
+# W&B local caches are disposable after online/offline runs are synced. W&B
+# stores metrics/configs online, but model checkpoints require separate storage.
+wandb/
+
+# Large model artifacts. Keep Hydra configs in baseline_code/outputs so the
+# experiment records remain reproducible without committing generated binaries.
+*.ckpt
+*.pt
+*.pth
+*.onnx
+baseline_code/outputs/**/checkpoints/
+baseline_code/outputs/**/logs/
+baseline_code/outputs/**/submissions/
+baseline_code/outputs/**/events.out.tfevents*
+
+# Common local training artifacts outside the baseline output tree
+checkpoints/
+lightning_logs/

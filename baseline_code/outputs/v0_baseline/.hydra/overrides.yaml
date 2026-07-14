@@ -1,0 +1,8 @@
+- preset=example
+- dataset_base_path=/data/ephemeral/home/receipt-text-detection/data/datasets/
+- exp_name=v0_baseline
+- exp_version=v0
+- trainer.max_epochs=10
+- trainer.num_sanity_val_steps=0
+- +trainer.accelerator=gpu
+- +trainer.devices=1

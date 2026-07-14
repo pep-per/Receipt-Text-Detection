@@ -1,0 +1,14 @@
+- preset=v4_photometric
+- dataset_base_path=/data/ephemeral/home/receipt-text-detection/data/datasets/
+- exp_name=v4_photometric1024_epoch9_eval
+- project_name=receipt-text-detection
+- wandb=True
+- exp_version=v4-eval
+- checkpoint_path="/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v4_photometric1024/checkpoints/epoch=9-step=2050.ckpt"
+- models.head.postprocess.box_thresh=0.25
+- transforms.val_transform.transforms.0.max_size=1024
+- transforms.val_transform.transforms.1.min_width=1024
+- transforms.val_transform.transforms.1.min_height=1024
+- transforms.test_transform.transforms.0.max_size=1024
+- transforms.test_transform.transforms.1.min_width=1024
+- transforms.test_transform.transforms.1.min_height=1024

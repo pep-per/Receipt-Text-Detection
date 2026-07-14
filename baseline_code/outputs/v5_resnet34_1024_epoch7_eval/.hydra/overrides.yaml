@@ -1,0 +1,15 @@
+- preset=example
+- dataset_base_path=/data/ephemeral/home/receipt-text-detection/data/datasets/
+- exp_name=v5_resnet34_1024_epoch7_eval
+- project_name=receipt-text-detection
+- wandb=True
+- exp_version=v5-eval
+- checkpoint_path="/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v5_resnet34_1024/checkpoints/epoch=7-step=1640.ckpt"
+- models.encoder.model_name=resnet34
+- models.head.postprocess.box_thresh=0.25
+- transforms.val_transform.transforms.0.max_size=1024
+- transforms.val_transform.transforms.1.min_width=1024
+- transforms.val_transform.transforms.1.min_height=1024
+- transforms.test_transform.transforms.0.max_size=1024
+- transforms.test_transform.transforms.1.min_width=1024
+- transforms.test_transform.transforms.1.min_height=1024

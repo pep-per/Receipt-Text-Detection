@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Receipt Text Detection Leaderboard Evidence</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #ffffff; color: #111827; font-family: Arial, "Noto Sans KR", sans-serif; letter-spacing: 0; }
+    .page { width: 1070px; min-height: 670px; padding: 16px 28px 22px; }
+    h1 { margin: 0 0 34px; font-size: 24px; line-height: 1.2; }
+    .panel { border: 1px solid #d9dee7; border-radius: 14px; padding: 32px 30px 28px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    .tabs { display: flex; gap: 18px; border-bottom: 1px solid #d9dee7; margin-bottom: 16px; }
+    .tab { padding: 10px 6px 9px; font-size: 14px; }
+    .tab.active { border-bottom: 2px solid #111827; }
+    .notice { display: flex; justify-content: space-between; min-height: 70px; font-size: 14px; line-height: 1.5; }
+    .updated { color: #6b7280; font-size: 12px; text-align: right; padding-top: 40px; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    th { height: 42px; border-bottom: 1px solid #d9dee7; text-align: left; padding: 8px 10px; font-size: 13px; font-weight: 500; }
+    td { height: 73px; border-bottom: 1px solid #d9dee7; padding: 9px 10px; font-size: 14px; vertical-align: middle; }
+    tr.mine { background: #f5f7fa; border-bottom: 1px solid #111827; }
+    tr.gold { background: #fff9e8; }
+    tr.bronze { background: #fff0e6; }
+    .score { font-variant-numeric: tabular-nums; }
+    .avatar { display: inline-flex; width: 30px; height: 30px; border-radius: 50%; background: #9b8178; color: white; align-items: center; justify-content: center; font-weight: 700; }
+    .footer { display: flex; justify-content: space-between; margin-top: 20px; color: #6b7280; font-size: 12px; }
+    .medals { color: #b45309; font-size: 14px; }
+    .submissions .panel { padding-top: 10px; border: 0; box-shadow: none; }
+    .intro { font-size: 14px; line-height: 1.5; margin: 0 0 28px; }
+    .status { height: 44px; border: 1px solid #d9dee7; border-radius: 8px; padding: 12px 18px; color: #64748b; margin-bottom: 28px; }
+    .dual { line-height: 1.55; font-variant-numeric: tabular-nums; }
+    .phase { display: inline-block; padding: 6px 10px; border-radius: 6px; color: #047857; background: #ecfdf5; font-size: 12px; }
+    .evidence { color: #6b7280; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <section class="page leaderboard final">
+    <h1>Leaderboard</h1>
+    <div class="panel">
+      <div class="tabs"><div class="tab">Leaderboard [mid]</div><div class="tab active">Leaderboard [final]</div></div>
+      <div class="notice"><div>The final ranking reflects the remaining evaluation dataset used for final scoring.</div><div class="updated">Last update: 2026.07.14 14:21:17</div></div>
+      <table>
+        <thead><tr><th style="width:9%">Rank</th><th style="width:26%">Team Name</th><th style="width:22%">Team Member</th><th>H-Mean</th><th>Precision</th><th>Recall</th><th>Entries</th><th>Final</th></tr></thead>
+        <tbody>
+          <tr class="mine"><td><strong>My<br>Rank<br>1</strong></td><td>UP24_이지연</td><td><span class="avatar">J</span></td><td class="score">0.9647</td><td class="score">0.9739</td><td class="score">0.9580</td><td>4</td><td>13h</td></tr>
+          <tr class="gold"><td>1</td><td>UP24_이지연</td><td><span class="avatar">J</span></td><td class="score">0.9647</td><td class="score">0.9739</td><td class="score">0.9580</td><td>4</td><td>13h</td></tr>
+          <tr><td>2</td><td>OCR 1조</td><td>Team</td><td class="score">0.9452</td><td class="score">0.9563</td><td class="score">0.9379</td><td>8</td><td>1d</td></tr>
+          <tr class="bronze"><td>3</td><td>OCR 이해민</td><td>Team</td><td class="score">0.9178</td><td class="score">0.9416</td><td class="score">0.9001</td><td>3</td><td>7h</td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span class="medals">Gold &nbsp;&nbsp; Silver &nbsp;&nbsp; Bronze</span><span class="evidence">Transcribed from supplied screenshot</span></div>
+    </div>
+  </section>
+
+  <section class="page leaderboard mid">
+    <h1>Leaderboard</h1>
+    <div class="panel">
+      <div class="tabs"><div class="tab active">Leaderboard [mid]</div><div class="tab">Leaderboard [final]</div></div>
+      <div class="notice"><div>The mid leaderboard uses part of the evaluation dataset.</div><div class="updated">Last update: 2026.07.14 14:25:39</div></div>
+      <table>
+        <thead><tr><th style="width:9%">Rank</th><th style="width:26%">Team Name</th><th style="width:22%">Team Member</th><th>H-Mean</th><th>Precision</th><th>Recall</th><th>Entries</th><th>Final</th></tr></thead>
+        <tbody>
+          <tr class="mine"><td><strong>My<br>Rank<br>1</strong></td><td>UP24_이지연</td><td><span class="avatar">J</span></td><td class="score">0.9621</td><td class="score">0.9754</td><td class="score">0.9520</td><td>4</td><td>13h</td></tr>
+          <tr class="gold"><td>1</td><td>UP24_이지연</td><td><span class="avatar">J</span></td><td class="score">0.9621</td><td class="score">0.9754</td><td class="score">0.9520</td><td>4</td><td>13h</td></tr>
+          <tr><td>2</td><td>OCR 1조</td><td>Team</td><td class="score">0.9474</td><td class="score">0.9561</td><td class="score">0.9410</td><td>8</td><td>1d</td></tr>
+          <tr class="bronze"><td>3</td><td>OCR 이해민</td><td>Team</td><td class="score">0.9147</td><td class="score">0.9413</td><td class="score">0.8944</td><td>3</td><td>7h</td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span class="medals">Gold &nbsp;&nbsp; Silver &nbsp;&nbsp; Bronze</span><span class="evidence">Transcribed from supplied screenshot</span></div>
+    </div>
+  </section>
+
+  <section class="page submissions">
+    <h1>Submission List</h1>
+    <div class="panel">
+      <p class="intro">Final scoring reflects the highest score among the selected submissions.</p>
+      <div class="status">✓ &nbsp; 2/2 submissions were submitted.</div>
+      <table>
+        <thead><tr><th style="width:9%">Final<br>Submission</th><th style="width:18%">Model Name</th><th style="width:9%">Submitter</th><th>H-Mean<br>H-Mean (Final)</th><th>Precision<br>Precision (Final)</th><th>Recall<br>Recall (Final)</th><th style="width:16%">Created at</th><th>Phase</th></tr></thead>
+        <tbody>
+          <tr><td>□</td><td>v2b</td><td><span class="avatar">J</span></td><td class="dual">0.9621<br>0.9647</td><td class="dual">0.9754<br>0.9739</td><td class="dual">0.9520<br>0.9580</td><td>2026.07.14 01:17</td><td><span class="phase">Complete</span></td></tr>
+          <tr><td>□</td><td>v2</td><td><span class="avatar">J</span></td><td class="dual">0.9603<br>0.9637</td><td class="dual">0.9667<br>0.9682</td><td class="dual">0.9556<br>0.9606</td><td>2026.07.13 05:31</td><td><span class="phase">Complete</span></td></tr>
+          <tr><td>□</td><td>v1</td><td><span class="avatar">J</span></td><td class="dual">0.9185<br>0.9221</td><td class="dual">0.9511<br>0.9554</td><td class="dual">0.8932<br>0.8978</td><td>2026.07.09 23:54</td><td><span class="phase">Complete</span></td></tr>
+          <tr><td>□</td><td>v0</td><td><span class="avatar">J</span></td><td class="dual">0.8818<br>0.8898</td><td class="dual">0.9651<br>0.9675</td><td class="dual">0.8194<br>0.8324</td><td>2026.07.09 23:21</td><td><span class="phase">Complete</span></td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span></span><span class="evidence">Transcribed from supplied screenshot</span></div>
+    </div>
+  </section>
+  <script>
+    const view = new URLSearchParams(location.search).get('view') || 'final';
+    document.querySelectorAll('.page').forEach((page) => {
+      const selected = page.classList.contains(view);
+      page.style.display = selected ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>

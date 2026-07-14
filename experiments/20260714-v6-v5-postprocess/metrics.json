@@ -1,0 +1,21 @@
+{
+  "experiment": "V6",
+  "model": "V5 ResNet34 epoch 7",
+  "checkpoint": "baseline_code/outputs/v5_resnet34_1024/checkpoints/epoch=7-step=1640.ckpt",
+  "resolution": 1024,
+  "pixel_thresh": 0.3,
+  "box_thresh": 0.3,
+  "macro": {
+    "hmean": 0.960568368434906,
+    "precision": 0.9662569165229797,
+    "recall": 0.9572378993034363
+  },
+  "global": {
+    "hmean": 0.9584724307060242,
+    "precision": 0.9630350470542908,
+    "recall": 0.9539528489112854
+  },
+  "wandb_run_id": "8cy2bpn0",
+  "decision": "reject_box_030_keep_v2b_control",
+  "box_035_status": "skipped_by_predeclared_gate"
+}

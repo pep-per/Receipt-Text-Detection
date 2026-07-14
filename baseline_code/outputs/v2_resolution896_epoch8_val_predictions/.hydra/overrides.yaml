@@ -1,0 +1,11 @@
+- preset=example
+- dataset_base_path=/data/ephemeral/home/receipt-text-detection/data/datasets/
+- exp_name=v2_resolution896_epoch8_val_predictions
+- minified_json=True
+- checkpoint_path="outputs/v2_resolution896/checkpoints/epoch=8-step=1845.ckpt"
+- datasets.predict_dataset.image_path=/data/ephemeral/home/receipt-text-detection/data/datasets/images/val
+- datasets.predict_dataset.annotation_path=null
+- models.head.postprocess.box_thresh=0.25
+- transforms.test_transform.transforms.0.max_size=896
+- transforms.test_transform.transforms.1.min_width=896
+- transforms.test_transform.transforms.1.min_height=896
