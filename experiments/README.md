@@ -8,6 +8,7 @@
 
 최근 실험:
 
+- [V8 Scale TTA](20260714-v8-scale-tta/README.md): adopted locally; 1024+1152 probability-map fusion raised macro/global H
 - [V6 V5 Post-processing](20260714-v6-v5-postprocess/README.md): rejected; box 0.30 lost recall and both macro/global H
 - [D0 Train/Val/Test Data Audit](20260714-d0-data-audit/README.md): completed; V7 skip, small-text scale TTA and V2B/V5 ensemble hypotheses retained
 - [V2 Resolution 896](20260712-v2-resolution-896/README.md): adopted, then superseded by 1024

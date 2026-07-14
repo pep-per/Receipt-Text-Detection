@@ -14,6 +14,7 @@
 | [V4 Photometric 1024](20260714-v4-photometric-1024/README.md) | v4 | 0.9626 | 0.9685 | 0.9587 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 local | [ckpt](/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v4_photometric1024/checkpoints/epoch=9-step=2050.ckpt), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/uzpx3za9) | Rejected locally; no leaderboard score. |
 | [V5 ResNet34 1024](20260714-v5-resnet34-1024/README.md) | v5 | 0.9646 | 0.9643 | 0.9668 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 local | [ckpt](/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v5_resnet34_1024/checkpoints/epoch=7-step=1640.ckpt), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/scibn6c0) | H tied locally; retained only as a recall-diverse ensemble candidate. |
 | [V6 V5 Post-processing](20260714-v6-v5-postprocess/README.md) | v6 | 0.9606 | 0.9663 | 0.9572 | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 local | [metric](20260714-v6-v5-postprocess/metrics.json), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/8cy2bpn0) | Rejected locally; no leaderboard score. |
+| [V8 Scale TTA](20260714-v8-scale-tta/README.md) | v8 | **0.9668** | **0.9725** | **0.9628** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 2026.07.14 offline | [metric](20260714-v8-scale-tta/metrics.json), [CSV](/data/ephemeral/home/receipt-text-detection/submissions/v8_scale_tta_1024_1152_20260714_154949.csv), [W&B](https://wandb.ai/pep-per/receipt-text-detection/runs/7eb4lky8) | Adopted local TTA candidate; macro/global H bootstrap CIs were positive. Competition closed, so no leaderboard score. |
 
 `N/A`는 해당 실험을 leaderboard에 제출하지 않아 점수가 존재하지 않는다는 뜻이다. Final
 score 원시 값과 증빙은 [2026-07-14 Final Leaderboard Evidence](/data/ephemeral/home/receipt-text-detection/docs/leaderboard/20260714/README.md)에 보존한다.
@@ -403,6 +404,30 @@ macro metrics. Reject V5 box 0.30. The predeclared gate required 0.30 to improve
 global H before testing 0.35, so 0.35 was not run. V2B remains the clean single control while V5
 box 0.25 remains only as the recall-diverse V9 ensemble member. V7 is already skipped by D0, so the
 next run is V8 `1024+1152` scale probability-map TTA.
+
+## V8 Scale TTA Result
+
+Detailed record: [V8 Scale TTA](20260714-v8-scale-tta/README.md)
+
+V8 reused the V2B epoch-8 checkpoint. It aligned the valid, unpadded regions of 1024 and 1152
+probability maps in the 1024 coordinate system, averaged them equally, and ran DB post-processing
+once at the unchanged `thresh=0.30`, `box_thresh=0.25`.
+
+- Macro H/P/R: `0.966840 / 0.972512 / 0.962827`
+- Global H/P/R: `0.965130 / 0.971017 / 0.959314`
+- Macro delta versus 1024 control: `+0.002055 / +0.002533 / +0.001364`
+- Global delta versus 1024 control: `+0.002881 / +0.003501 / +0.002274`
+- Paired bootstrap macro H 95% CI and P(delta > 0):
+  `[+0.000548, +0.003631]`, `0.9967`
+- Paired bootstrap global H 95% CI and P(delta > 0):
+  `[+0.001036, +0.004851]`, `0.9998`
+
+Both H aggregation gates passed. The gain was larger on the control-H bottom quartile (`+0.00789`),
+short-text-side bottom quartile (`+0.00778`), and high-small-text-ratio quartile (`+0.00527`), which
+supports the D0 hypothesis. Adopt `1024+1152` as a TTA candidate and skip the lower-scale fallback.
+The post-competition test JSON/CSV passed all format checks, but it is not hidden-score evidence.
+Next run V9 with V2B/V5 model map fusion alone so scale TTA and architecture diversity remain
+separate effects.
 
 ## Final Leaderboard Result And Local Calibration
 

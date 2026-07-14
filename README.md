@@ -16,6 +16,14 @@
 - 결과 증빙과 Local/Public/Final 분석:
   [2026-07-14 Final Leaderboard](docs/leaderboard/20260714/README.md)
 
+## 대회 종료 후 실험
+
+- Current local inference candidate: V8 `1024+1152` probability-map TTA
+- Official-val macro H/P/R: `0.9668 / 0.9725 / 0.9628`
+- V2B 1024 control 대비 macro/global H: `+0.0021 / +0.0029`
+- 상세 결과: [V8 Scale TTA](experiments/20260714-v8-scale-tta/README.md)
+- 대회가 종료되어 V8에는 leaderboard 점수가 없으며, test CSV는 offline 재현 artifact다.
+
 ## 대회 요약
 
 - Task: receipt text detection

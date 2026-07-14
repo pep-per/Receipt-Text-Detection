@@ -493,6 +493,20 @@ control로 넘긴다.
 좌표계로 복원해 평균하고 DB post-processing을 한 번만 적용해 duplicate와 500개 cap 위험을
 줄인다. V8은 가능성 선별 단계이므로 최종 threshold를 광범위하게 최적화하지 않는다.
 
+실행 결과:
+
+- 상세 기록: [V8 Scale TTA](20260714-v8-scale-tta/README.md)
+- `1024+1152` macro H/P/R: `0.966840 / 0.972512 / 0.962827`
+- 1024 control 대비 macro delta: `+0.002055 / +0.002533 / +0.001364`
+- `1024+1152` global H/P/R: `0.965130 / 0.971017 / 0.959314`
+- 1024 control 대비 global delta: `+0.002881 / +0.003501 / +0.002274`
+- Macro/global H paired bootstrap 개선 확률: `0.9967 / 0.9998`; 두 95% CI 하한 모두 양수
+- 결정: `1024+1152` 채택, lower-scale fallback과 threshold sweep 미실행
+
+V8은 clean single model을 교체한 것이 아니라 inference candidate를 하나 통과시킨 것이다.
+다음 V9에서는 V8 TTA를 섞지 않고 V2B/V5 model-map fusion만 평가해 architecture diversity의
+효과를 분리한다. 최종 single model이 결정된 뒤 V13에서 두 fusion 축의 결합을 재평가한다.
+
 ## V9: Existing-model Probability-map Ensemble
 
 목적:
@@ -760,6 +774,6 @@ SSL algorithm, TTA scale, ensemble weight, pseudo filtering threshold를 Public 
 - 파일 생성은 모델 채택과 inference pipeline 재현을 증명하기 위한 것이며 leaderboard 성능
   증거로 표현하지 않는다.
 
-이에 따라 V6은 local H가 하락해 submission artifact를 만들지 않았고, 다음 V8에서
-`1024+1152`가 사전 local gate를 통과하면 leaderboard 제출 가능 여부와 관계없이 JSON과 CSV를
-생성한다.
+이에 따라 V6은 local H가 하락해 submission artifact를 만들지 않았다. V8 `1024+1152`는
+사전 local gate를 통과해 test JSON과 CSV를 `Generated offline, competition closed` 상태로
+생성했다. 다음 offline 실험은 V9 V2B/V5 probability-map ensemble이다.

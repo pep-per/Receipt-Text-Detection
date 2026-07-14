@@ -1,0 +1,20 @@
+{
+  "split": "test",
+  "scales": [
+    1024,
+    1152
+  ],
+  "fusion": "valid-region probability-map equal average",
+  "config": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v2b_resolution1024_best_eval/.hydra/config.yaml",
+  "checkpoint": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v2b_resolution1024/checkpoints/epoch=8-step=1845.ckpt",
+  "dataset_root": "/data/ephemeral/home/receipt-text-detection/data/datasets",
+  "batch_size": 4,
+  "workers": 4,
+  "device": "cuda",
+  "bootstrap_samples": 10000,
+  "seed": 42,
+  "segmentation_thresh": 0.3,
+  "box_thresh": 0.25,
+  "runtime_seconds": 31.744383931159973,
+  "peak_gpu_memory_gb": 1.3508009910583496
+}
