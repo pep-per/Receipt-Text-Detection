@@ -1,0 +1,39 @@
+{
+  "control": {
+    "images": 404,
+    "regions_total": 45067,
+    "regions_mean": 111.5519801980198,
+    "regions_min": 53,
+    "regions_max": 216,
+    "macro_hmean": 0.9647846673384751,
+    "macro_precision": 0.9699790920361434,
+    "macro_recall": 0.9614629999245747,
+    "global_hmean": 0.9622491598129272,
+    "global_precision": 0.9675159454345703,
+    "global_recall": 0.9570394158363342
+  },
+  "ensemble": {
+    "images": 404,
+    "regions_total": 43728,
+    "regions_mean": 108.23762376237623,
+    "regions_min": 50,
+    "regions_max": 225,
+    "macro_hmean": 0.9672655067821541,
+    "macro_precision": 0.9690829894625315,
+    "macro_recall": 0.9671768671510244,
+    "global_hmean": 0.9650900363922119,
+    "global_precision": 0.9658799767494202,
+    "global_recall": 0.9643014073371887
+  },
+  "delta": {
+    "macro_hmean": 0.0024808394436789394,
+    "macro_precision": -0.0008961025736119455,
+    "macro_recall": 0.00571386722644962,
+    "global_hmean": 0.002840876579284668,
+    "global_precision": -0.0016359686851501465,
+    "global_recall": 0.007261991500854492,
+    "regions_mean": -3.3143564356435746
+  },
+  "runtime_seconds": 142.6458346992731,
+  "peak_gpu_memory_gb": 1.4675049781799316
+}

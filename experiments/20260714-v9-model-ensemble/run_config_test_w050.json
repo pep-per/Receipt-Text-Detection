@@ -1,0 +1,21 @@
+{
+  "split": "test",
+  "v2b_weight": 0.5,
+  "v5_weight": 0.5,
+  "resolution": 1024,
+  "fusion": "same-scale probability-map weighted average",
+  "v2b_config": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v2b_resolution1024_best_eval/.hydra/config.yaml",
+  "v2b_checkpoint": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v2b_resolution1024/checkpoints/epoch=8-step=1845.ckpt",
+  "v5_config": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v5_resnet34_1024_epoch7_eval/.hydra/config.yaml",
+  "v5_checkpoint": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v5_resnet34_1024/checkpoints/epoch=7-step=1640.ckpt",
+  "dataset_root": "/data/ephemeral/home/receipt-text-detection/data/datasets",
+  "batch_size": 4,
+  "workers": 4,
+  "device": "cuda",
+  "bootstrap_samples": 10000,
+  "seed": 42,
+  "segmentation_thresh": 0.3,
+  "box_thresh": 0.25,
+  "runtime_seconds": 25.611645489931107,
+  "peak_gpu_memory_gb": 1.4675049781799316
+}

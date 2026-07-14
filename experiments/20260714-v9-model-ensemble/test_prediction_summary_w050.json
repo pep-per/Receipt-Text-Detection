@@ -1,0 +1,12 @@
+{
+  "images": 413,
+  "regions_total": 44247,
+  "regions_mean": 107.13559322033899,
+  "regions_min": 38,
+  "regions_max": 219,
+  "empty_images": 0,
+  "over_500_images": 0,
+  "runtime_seconds": 25.611645489931107,
+  "peak_gpu_memory_gb": 1.4675049781799316,
+  "predictions_json": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v9_v2b_v5_equal/submissions/20260714_170846.json"
+}

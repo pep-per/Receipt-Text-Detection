@@ -1,0 +1,36 @@
+{
+  "json_path": "/data/ephemeral/home/receipt-text-detection/baseline_code/outputs/v9_v2b_v5_equal/submissions/20260714_170846.json",
+  "csv_path": "/data/ephemeral/home/receipt-text-detection/submissions/v9_v2b_v5_equal_20260714_170846.csv",
+  "expected_images": 413,
+  "max_polygons_per_image": 500,
+  "boundary_tolerance": 8.0,
+  "json": {
+    "rows": 413,
+    "missing_filenames": [],
+    "extra_filenames": [],
+    "total_polygons": 44247,
+    "min_polygons": 38,
+    "max_polygons": 219,
+    "mean_polygons": 107.13559322033899,
+    "empty_images": 0,
+    "over_cap_images": 0,
+    "invalid_point_count": 0,
+    "non_finite_coordinates": 0,
+    "zero_area": 0,
+    "invalid_geometry": 0,
+    "duplicate_polygons": 0,
+    "boundary_overshoot_polygons": 26,
+    "max_boundary_overshoot": 7.0,
+    "hard_boundary_violations": 0
+  },
+  "csv": {
+    "rows": 413,
+    "missing_filenames": [],
+    "extra_filenames": [],
+    "duplicate_filename_rows": 0,
+    "invalid_coordinate_sets": 0,
+    "non_finite_coordinates": 0,
+    "json_polygon_count_mismatches": 0
+  },
+  "passed": true
+}

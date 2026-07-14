@@ -331,7 +331,7 @@ def global_scores_from_sums(state_sums):
     return {"hmean": hmean, "precision": precision, "recall": recall}
 
 
-def bootstrap_paired(frame, samples, seed):
+def bootstrap_paired(frame, samples, seed, candidate_prefix="tta"):
     rng = np.random.default_rng(seed)
     count = len(frame)
     distributions = {
@@ -345,13 +345,13 @@ def bootstrap_paired(frame, samples, seed):
         indices = rng.integers(0, count, size=(chunk, count))
         for metric in ("hmean", "precision", "recall"):
             difference = (
-                frame[f"tta_{metric}"].to_numpy()
+                frame[f"{candidate_prefix}_{metric}"].to_numpy()
                 - frame[f"control_{metric}"].to_numpy()
             )
             distributions[f"macro_{metric}"].append(difference[indices].mean(axis=1))
 
         method_scores = {}
-        for method in ("control", "tta"):
+        for method in ("control", candidate_prefix):
             state_sums = {
                 name: frame[f"{method}_state_{name}"].to_numpy()[indices].sum(axis=1)
                 for name in SCORE_STATE_NAMES
@@ -359,7 +359,8 @@ def bootstrap_paired(frame, samples, seed):
             method_scores[method] = global_scores_from_sums(state_sums)
         for metric in ("hmean", "precision", "recall"):
             distributions[f"global_{metric}"].append(
-                method_scores["tta"][metric] - method_scores["control"][metric]
+                method_scores[candidate_prefix][metric]
+                - method_scores["control"][metric]
             )
 
     rows = []
