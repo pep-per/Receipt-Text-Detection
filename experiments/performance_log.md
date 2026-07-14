@@ -475,6 +475,32 @@ so do not open V10-ALT merely to search SSL algorithms on the same val. The vali
 a recall-diverse reproducibility artifact, not a selected model or hidden-score claim. Next run
 V11A group-aware K-fold manifest generation.
 
+Detailed root-cause analysis:
+[V10 SSL Effect Analysis](20260714-v10-domain-ssl/ssl_effect_analysis.md)
+
+The SSL encoder increased small-text recall but also increased merged detections, false-positive
+characters and CLEval precision granularity penalties. Its global image-level 224 px objective was
+not well aligned with 1024 px dense boundary prediction, equal-family sampling underweighted the
+official target images, and whole-detector `lr=0.001` may have overwritten the initialization gain.
+Do not extend epochs immediately. Revisit only after V11 OOF confirms a persistent small-text failure
+and use a matched ImageNet/SSL layer-wise-LR control.
+
+## V11A Group-aware K-fold Split Result
+
+Detailed record: [V11A Group-aware K-fold Split](20260714-v11a-kfold-split/README.md)
+
+- Human-labeled images: `3,676`; every filename appears exactly once.
+- Fold sizes: `735 / 735 / 736 / 735 / 735`.
+- Original-val source counts: `81 / 81 / 80 / 80 / 82`.
+- Near-duplicate candidates/accepted pairs: `96 / 11`; group leakage: `0`.
+- Maximum stratum proportion delta: `0.001159`.
+- Maximum continuous-feature fold-mean z-score: `0.06513`.
+- Manifest SHA-256: `d422e2b86da3b2225213a9c6159f62e8fa51283990940c821298ea0a4103ebac`.
+
+The first shuffled SGKF attempt failed structural balance before any model was trained. The final
+deterministic SGKF manifest passed every gate and reproduced byte-for-byte. Adopt it as the sole
+V11B OOF split; do not regenerate it after observing fold scores.
+
 ## Final Leaderboard Result And Local Calibration
 
 Detailed evidence:

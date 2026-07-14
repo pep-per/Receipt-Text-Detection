@@ -1,0 +1,24 @@
+{
+  "version": "v11_5fold_seed42",
+  "image_count": 3676,
+  "folds": 5,
+  "seed": 42,
+  "splitter": "sklearn.model_selection.StratifiedGroupKFold",
+  "shuffle": false,
+  "splitter_random_state": null,
+  "training_seed_reserved": 42,
+  "stratification": "original_split x gt_regions quintile x small_text_lt12_ratio binary",
+  "grouping": {
+    "candidate_rule": "exact SHA or aspect relative difference <= 0.12 and pHash distance <= 8",
+    "acceptance_rules": [
+      "exact SHA-256",
+      "pHash distance <= 2 and GT-region relative difference <= 0.10",
+      "pHash distance <= 6, grayscale correlation >= 0.90, and GT-region relative difference <= 0.10"
+    ],
+    "candidate_pair_count": 96,
+    "accepted_pair_count": 11,
+    "multi_image_group_count": 11
+  },
+  "manifest_sha256": "d422e2b86da3b2225213a9c6159f62e8fa51283990940c821298ea0a4103ebac",
+  "validation_passed": true
+}

@@ -98,6 +98,9 @@ H의 두 confidence interval이 모두 0을 포함하고 개선 확률도 낮다
 - Test CSV는 모델 채택이 아니라, 이전의 offline artifact 요청과 recall-diverse 후보 보존을
   위해 생성했다. Hidden score 개선 증거로 사용하지 않는다.
 
+원인별 수치, CLEval state 변화, 개선 우선순위와 재실험 gate는
+[SSL Effect Analysis And Revisit Plan](ssl_effect_analysis.md)에 기록한다.
+
 ## Commands
 
 ```bash
